@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zap Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="main-nav container flex">
+            <a href="#" onclick="reload()" class="company-logo">
+                <img src="logos/logo16-1.png" alt="">
+            </a>
+
+            <div class="nav-links" id="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="Techno" onclick="onNavItemClick('Techno')">Technology 🚀</li>
+                    <li class="hover-link nav-item" id="finance" onclick="onNavItemClick('finance')">Finance📈</li>
+                    <li class="hover-link nav-item" id="politics" onclick="onNavItemClick('politics')">Politics🗳️</li>
+                    <li class="hover-link nav-item" id="ipl" onclick="onNavItemClick('ipl')">Cricket🏏</li>
+                </ul>
+            </div>
+
+            <div class="assign">
+                <div class="search-bar flex">
+                    <input id="search-text" type="text" class="news-input" placeholder="Enter.." onkeypress="handleKeyPress(event)">
+                    <button class="search-button" id="search-button">
+                        <img src="logos/srch.png" alt="Search">
+                    </button>
+                </div>
+
+                <!-- <div class="toggle-button" id="toggle-button" onclick="toggleNav()">
+                    ☰      
+                </div> -->
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="scrollable-container">
+            <div class="cards-container container flex" id="cards-container">
+                
+            </div>
+        </div>
+    </main>
+
+    <template id="template_card">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="" id="news-img">
+            </div>
+            <div class="card-content">
+                <h3 id="news-title">This is the Title</h3>
+                <h6 class="news-source">End Gadget 22/6/24</h6>
+                <p class="news-des">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus necessitatibus
+                    expedita debitis exercitationem aliquam iste in, nihil iusto consectetur? Quis laudantium impedit
+                    dolores mollitia alias.</p>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>
