@@ -25,7 +25,6 @@ async function fetchNews(query) {
     }
 }
 
-
 function bindData(articles) {
     const cardsCont = document.getElementById("cards-container");
     const templ_cls = document.getElementById("template_card");
@@ -65,6 +64,7 @@ let currSelNav = null;
 
 function onNavItemClick(id) {
     fetchNews(id);
+    clearSearchBar();
     if (currSelNav) {
         currSelNav.classList.remove("active");
     }
@@ -101,4 +101,8 @@ function handleKeyPress(event) {
         currSelNav?.classList.remove("active");
         currSelNav = null;
     }
+}
+
+function clearSearchBar() {
+    searchText.value = '';
 }
