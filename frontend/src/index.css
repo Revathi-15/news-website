@@ -1,0 +1,51 @@
+:root{
+  --bg-1: #f5f7ff;
+  --bg-2: #e8f0ff;
+  --dark-bg-1: #0a0f1a;
+  --dark-bg-2: #0d1320;
+  --accent-1: #7c3aed;
+  --accent-2: #5563ff;
+  --muted: rgba(255,255,255,0.72);
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%;}
+body{
+  margin:0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+  color: #1f2937;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  transition: background 300ms ease, color 300ms ease;
+}
+
+/* Dark mode body styles */
+body.dark-mode{
+  background: linear-gradient(135deg, var(--dark-bg-1) 0%, var(--dark-bg-2) 100%) !important;
+  color:#e5e7eb;
+}
+
+/* utility container to center auth pages */
+.auth-background{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem 1rem;
+}
+
+/* reduce flicker when navigating client-side */
+.page-fade{opacity:0;animation:fadeInPage .28s forwards}
+@keyframes fadeInPage{to{opacity:1}}
+
+/* global button hover used across pages */
+.btn{transition:transform .18s ease,box-shadow .18s ease}
+.btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(20,40,80,0.18)}
+.btn:active{transform:translateY(-1px)}
+
+/* Smooth transition for all elements */
+body, body *,
+body.dark-mode, body.dark-mode *{
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

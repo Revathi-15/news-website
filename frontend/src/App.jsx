@@ -1,24 +1,31 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// Handles Routing for React Frontend
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { DarkModeProvider } from './context/DarkModeContext';
+import LandingPage from './LandingPage';
+import LoginPage from './pages/auth/LoginPage';
+import RegisterPage from './pages/auth/RegisterPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
 import HomePage from './components/Home/Homepage';
-// import WeatherApp from './components/Weather-Forecast/WeatherApp';
-import AddNote from './components/Add_note/Note.jsx';
-import BotAi from './components/bot/Bot_ai.jsx';
-
-import './App.css';
+import AdvancedNotesApp from './components/Add_note/AdvancedNotesApp';
+import WeatherApp from './components/WeatherApp/weather_box';
+import Bot from './components/Bot_ai/bot';
 
 function App() {
   return (
-    <Router> 
-      <div className="App">
-        <Routes> 
-          <Route path="/" element={<HomePage />} />
-          {/* <Route path="/weather" element={<WeatherApp />} />  */}
-          <Route path="/add-note" element={<AddNote />} />
-          <Route path="/bot" element={<BotAi />} />
+    <DarkModeProvider>
+      <Router>
+        <Routes>
+          <Route path="/"                element={<LandingPage />} />
+          <Route path="/login"           element={<LoginPage />} />
+          <Route path="/register"        element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/home"            element={<HomePage />} />
+          <Route path="/weather"         element={<WeatherApp />} />
+          <Route path="/addnote"         element={<AdvancedNotesApp />} />
+          <Route path="/bot"             element={<Bot />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </DarkModeProvider>
   );
 }
 

@@ -1,0 +1,309 @@
+/* ════════════════════════════════════════
+   Weather page — full-screen gif + glass card
+   ════════════════════════════════════════ */
+
+.wx-page {
+  position: fixed;
+  inset: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Full-bleed animated GIF ── */
+.wx-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.wx-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wx-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(4, 12, 30, 0.68) 0%,
+    rgba(4, 12, 30, 0.48) 45%,
+    rgba(4, 12, 30, 0.72) 100%
+  );
+}
+
+/* Everything layered above bg — except the back button which uses absolute */
+.wx-page > *:not(.wx-bg):not(.wx-back-btn) {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Back button — absolute top-left of wx-page (which = viewport) ── */
+.wx-back-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 9999;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #1e293b;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,255,255,0.25);
+  transition: transform 0.2s, background 0.2s;
+  padding: 0;
+  /* Remove from flex flow so it doesn't affect centering of the panel */
+  flex-shrink: 0;
+}
+.wx-back-btn:hover {
+  transform: translateX(-3px) scale(1.05);
+  background: #334155;
+}
+
+/* ── Glass card ── */
+.wx-glass-panel {
+  width: min(720px, 90vw);
+  background: rgba(255, 255, 255, 0.11);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 28px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  padding: 32px 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.4);
+}
+
+/* ── City ── */
+.wx-city { text-align: center; }
+.wx-city-name {
+  display: block;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+  letter-spacing: -0.02em;
+}
+.wx-city-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.55);
+  margin-top: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.wx-error {
+  color: #fca5a5;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* ── Search bar ── */
+.wx-search-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  align-items: center;
+}
+.wx-search-wrap input {
+  width: 100%;
+  padding: 11px 112px 11px 18px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  outline: none;
+  transition: border-color 0.22s, background 0.22s;
+}
+.wx-search-wrap input::placeholder { color: rgba(255,255,255,0.45); }
+.wx-search-wrap input:focus {
+  border-color: rgba(255,255,255,0.6);
+  background: rgba(255,255,255,0.22);
+}
+.wx-search-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  color: #1a3a5e;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: filter 0.18s, transform 0.18s;
+}
+.wx-search-btn:hover {
+  filter: brightness(1.06);
+  transform: translateY(-50%) scale(1.02);
+}
+
+/* ── Data area ── */
+.wx-data-area { width: 100%; }
+
+/* ── Loading dots ── */
+.wx-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 0;
+  color: rgba(255,255,255,0.7);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.wx-dots { display: flex; gap: 8px; }
+.wx-dots span {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  opacity: 0.3;
+  animation: wxBounce 1s ease-in-out infinite;
+}
+.wx-dots span:nth-child(2) { animation-delay: 0.15s; }
+.wx-dots span:nth-child(3) { animation-delay: 0.30s; }
+@keyframes wxBounce {
+  0%,100% { opacity: 0.3; transform: translateY(0); }
+  50%      { opacity: 1;   transform: translateY(-7px); }
+}
+
+/* ════════════════════════════════════════
+   WeatherData inner layout
+   ════════════════════════════════════════ */
+
+.wd-root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ── Hero temperature block ── */
+.wd-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.wd-emoji {
+  font-size: 3.6rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.wd-temp {
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.wd-desc {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.88);
+  font-weight: 500;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+}
+
+.wd-minmax {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.78);
+  margin-top: 2px;
+  font-weight: 600;
+}
+.wd-mm-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.5);
+  margin-right: 3px;
+}
+.wd-mm-sep {
+  color: rgba(255,255,255,0.3);
+  font-size: 1rem;
+}
+
+/* ── Stats strip — solid dark background for guaranteed readability ── */
+.wd-stats-strip {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  background: rgba(10, 18, 38, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.wd-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 16px 6px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  transition: background 0.18s;
+}
+.wd-stat:last-child { border-right: none; }
+.wd-stat:hover { background: rgba(255,255,255,0.06); }
+
+.wd-stat-emoji {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+.wd-stat-value {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+}
+.wd-stat-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 500px) {
+  .wx-glass-panel { padding: 24px 16px 22px; gap: 18px; }
+  .wd-temp { font-size: 3.2rem; }
+  .wd-emoji { font-size: 2.8rem; }
+  .wd-stat-value { font-size: 0.8rem; }
+  .wd-stat { padding: 12px 4px; }
+  .wd-stat-label { font-size: 0.56rem; }
+}

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Build output
+frontend/build/
+dist/
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+backend/__pycache__/
+backend/instance/flaskdb.db
+
+# Environment files — keep out of git (contain secrets)
+.env
+backend/.env
+frontend/.env
+
+# Cache
+frontend/.cache/
+.eslintcache
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Package locks (optional — remove these lines if you want to commit them)
+# package-lock.json
