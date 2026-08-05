@@ -77,21 +77,6 @@ npm start                    # runs on http://localhost:3000
 
 > Keep both terminals running simultaneously.
 
----
+### Demo
+https://github.com/user-attachments/assets/050720ff-fd7e-4478-bb9c-abf19dcb36b5
 
-## Project Structure
-
-```
-blog-website/
-├── backend/
-│   ├── app.py          # Flask REST API (14 endpoints)
-│   ├── models.py       # SQLAlchemy models (User, Note, Bookmark)
-│   └── .env            # secrets (not committed)
-└── frontend/
-    ├── src/
-    │   ├── components/ # Home, Notes, Weather, Bot
-    │   ├── pages/      # Auth, Bookmarks, Profile
-    │   ├── context/    # Dark mode (Context API)
-    │   └── api.js      # Axios instance with JWT interceptor
-    └── .env            # API keys (not committed)
-```
