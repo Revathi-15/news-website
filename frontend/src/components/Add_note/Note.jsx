@@ -2,10 +2,17 @@ import { useMemo, useState } from "react";
 
 const formatTimestamp = (timestamp) => {
   if (!timestamp) return "";
+  // Parse the ISO string and display in user's LOCAL timezone
   const date = new Date(timestamp);
-  const day = date.toLocaleDateString(undefined, { weekday: "short" });
-  const time = date.toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" });
-  return `${day}, ${date.toLocaleDateString()} · ${time}`;
+  return date.toLocaleString(undefined, {
+    weekday: "short",
+    day:     "2-digit",
+    month:   "numeric",
+    year:    "numeric",
+    hour:    "2-digit",
+    minute:  "2-digit",
+    hour12:  true,
+  });
 };
 
 const countWords = (text) => {

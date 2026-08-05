@@ -29,8 +29,14 @@ export default function ForgotPasswordPage() {
       await api.post('/forgot-password', { email });
       setInfo(`A 6-digit code has been sent to ${email}.`);
       setStep(2);
-    } catch {
-      setError('Failed to send reset code. Please try again.');
+    } catch (err) {
+      if (err.response?.data?.error === 'google_account') {
+        setError(
+          'This email is linked to a Google account. Password reset is managed by Google — please visit myaccount.google.com to reset your Google password.'
+        );
+      } else {
+        setError(err.response?.data?.error || 'Failed to send reset code. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

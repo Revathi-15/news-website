@@ -297,3 +297,78 @@
   .avatar-ring { width: 130px; height: 130px; }
   #btn { padding: 12px 22px; font-size: 0.9rem; }
 }
+
+/* ── Bot input bar with inline mic (new design) ── */
+.bot-input-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1.5px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  padding: 6px 6px 6px 20px;
+  gap: 6px;
+  backdrop-filter: blur(14px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.bot-input-bar:focus-within {
+  border-color: rgba(74, 124, 255, 0.6);
+  box-shadow: 0 0 0 3px rgba(74, 124, 255, 0.12);
+}
+
+.bot-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  min-width: 0;
+}
+.bot-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+.bot-send-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(74, 124, 255, 0.25);
+  color: #7eb3ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s, transform 0.18s;
+}
+.bot-send-btn:hover:not(:disabled) { background: rgba(74,124,255,0.4); transform: scale(1.08); }
+.bot-send-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+
+.bot-mic-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 231, 231, 0.12);
+  color: #00e7e7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.18s, transform 0.18s, box-shadow 0.18s;
+}
+.bot-mic-btn:hover {
+  background: rgba(0, 231, 231, 0.22);
+  transform: scale(1.08);
+}
+.bot-mic-btn.active {
+  background: rgba(255, 24, 180, 0.2);
+  color: #ff1cad;
+  box-shadow: 0 0 16px rgba(255, 24, 180, 0.35);
+  animation: micPulse 1.2s ease-in-out infinite;
+}
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255,24,180,0.3); }
+  50%       { box-shadow: 0 0 24px rgba(255,24,180,0.6); }
+}

@@ -515,3 +515,34 @@
   .add-note-btn { padding: 9px 14px; font-size: 0.88rem; }
   .notes-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Notes loading / error states (Feature 1) ── */
+.notes-loading-state {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; padding: 56px 20px; color: #64748b;
+}
+.notes-dots { display: flex; gap: 8px; }
+.notes-dots span {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #6366f1; animation: notesBounce 1.1s ease-in-out infinite; opacity: 0.3;
+}
+.notes-dots span:nth-child(2) { animation-delay: 0.15s; }
+.notes-dots span:nth-child(3) { animation-delay: 0.30s; }
+@keyframes notesBounce {
+  0%,100% { opacity: 0.3; transform: translateY(0); }
+  50%      { opacity: 1; transform: translateY(-8px); }
+}
+.notes-loading-state p { font-size: 0.9rem; font-weight: 500; }
+.notes-wrapper.dark .notes-loading-state { color: #94a3b8; }
+
+.notes-error {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25);
+  border-radius: 12px; padding: 12px 16px; color: #f87171;
+  font-size: 0.88rem; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.notes-error button {
+  background: rgba(239,68,68,0.15); border: none; border-radius: 999px;
+  color: #f87171; font-size: 0.8rem; font-weight: 700;
+  padding: 4px 12px; cursor: pointer; margin-left: auto;
+}
