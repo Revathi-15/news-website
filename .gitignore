@@ -25,6 +25,9 @@ frontend/.env
 frontend/.cache/
 .eslintcache
 
+# Interview PDFs (local only)
+*.pdf
+
 # Logs
 *.log
 npm-debug.log*
